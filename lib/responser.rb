@@ -37,7 +37,6 @@ class Responser<Mechanize
     @statuses[url] = begin
       get(url, nil, nil, HEADER).code
     rescue Exception => e
-      raise("URL #{url} has internal server error") if e.include?('500')
       e.message
     end
     filter

@@ -53,3 +53,5 @@ class Responser<Mechanize
     end
   end
 end
+
+Responser.new.start('http://makemeup.lviv.co.vu',nil,nil)

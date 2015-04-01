@@ -5,11 +5,11 @@ class Responser<Mechanize
   attr_reader :statuses
   HEADER = {'Accept' => 'text/html','Content-Type' => 'text/html'}
 
-  def start(auth_page, login, password)
+  def start(start_page)
     @statuses = {}
-    path = URI(auth_page).request_uri
-    @base_uri = path == '/' ? auth_page : auth_page.sub(path, '')
-    add_auth(auth_page, login, password)
+    path = URI(start_page).request_uri
+    @base_uri = path == '/' ? start_page : start_page.sub(path, '')
+    get start_page
     search
   end
 
@@ -26,7 +26,7 @@ class Responser<Mechanize
   end
 
   def is_exclusion?(link)
-    link == '#' || link.empty? || link =~ /^(http|https)/ || link =~ /\/logs\//
+    link == '#' || link.empty? || link =~ /^(http|https)/
   end
 
   def write_to_log(message)
@@ -53,5 +53,3 @@ class Responser<Mechanize
     end
   end
 end
-
-Responser.new.start('http://makemeup.lviv.co.vu',nil,nil)
